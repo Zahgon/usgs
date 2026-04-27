@@ -12,9 +12,7 @@ def dataset_filters(dataset):
 
     :param str dataset:
     """
-    return json.dumps({
-        "datasetName": dataset,
-    })
+    pass
 
 def download_options(dataset, entity_ids):
     """
@@ -41,9 +39,7 @@ def dataset_download_options(dataset):
 
     :param str dataset: Used to identify the which dataset to return results for.
     """
-    payload = {"datasetName": dataset}
-
-    return json.dumps(payload)
+    pass
 
 def download_request(dataset, entity_id, product_id):
     """
@@ -53,18 +49,7 @@ def download_request(dataset, entity_id, product_id):
     :param str entity_id:
     :param str product_id:
     """
-
-    payload = {
-        "downloads": [
-            {
-                "entityId": entity_id,
-                "productId": product_id
-            }
-        ],
-        "downloadApplication": "EE"
-    }
-
-    return json.dumps(payload)
+    pass
 
 def dataset_search(dataset, catalog, start_date=None, end_date=None, ll=None, ur=None):
     """
@@ -97,32 +82,7 @@ def dataset_search(dataset, catalog, start_date=None, end_date=None, ll=None, ur
 
         e.g. { "longitude": 0.0, "latitude": 0.0 }
     """
-
-    payload = {
-        "datasetName": dataset,
-        "catalog": catalog
-    }
-
-    if start_date and end_date:
-        payload["temporalFilter"] = {
-            "start": start_date,
-            "end": end_date
-        }
-
-    if ll and ur:
-        payload["spatialFilter"] = {
-            "filterType": "mbr",
-            "lowerLeft": {
-                "latitude": ll["latitude"],
-                "longitude": ll["longitude"]
-            },
-            "upperRight": {
-                "latitude": ur["latitude"],
-                "longitude": ur["longitude"]
-            }
-        }
-
-    return json.dumps(payload)
+    pass
 
 def login(username, token):
     """
@@ -150,35 +110,11 @@ def scene_metadata(dataset, entity_id):
     :param dataset:
     :param entity_id:
     """
-    payload = {
-        "datasetName": dataset,
-        "entityId": entity_id,
-        "metadataType": "full"
-    }
-
-    return json.dumps(payload)
+    pass
 
 
 def great_circle_dist(lat, lng, dist):
-    lat = math.radians(lat)
-    lng = math.radians(lng)
-    brng = math.radians(45.0)
-    ibrng = math.radians(225.0)
-
-    earth_radius = 6371000.0
-    dR = (dist / 2.0)/ earth_radius
-
-    lat1 = math.asin( math.sin(lat)*math.cos(dR) +
-        math.cos(lat)*math.sin(dR)*math.cos(brng) );
-    lng1 = lng + math.atan2(math.sin(brng)*math.sin(dR)*math.cos(lat),
-        math.cos(dR)-math.sin(lat)*math.sin(lat1));
-
-    lat2 = math.asin( math.sin(lat)*math.cos(dR) +
-        math.cos(lat)*math.sin(dR)*math.cos(ibrng) );
-    lng2 = lng + math.atan2(math.sin(ibrng)*math.sin(dR)*math.cos(lat),
-        math.cos(dR)-math.sin(lat)*math.sin(lat2));
-
-    return [math.degrees(lat1), math.degrees(lat2)], [math.degrees(lng1), math.degrees(lng2)]
+    pass
 
 def scene_search(
     dataset, max_results=None, metadata_type=None, start_date=None,
@@ -186,39 +122,4 @@ def scene_search(
     lat=None, lng=None, distance=100,
     where=None, starting_number=None):
 
-    payload = defaultdict(dict, {
-        "datasetName": dataset,
-        "maxResults": max_results,
-        "startingNumber": starting_number,
-        "metadataType": metadata_type
-    })
-
-    if (start_date is not None) and (end_date is not None):
-        payload["sceneFilter"]["acquisitionFilter"] = {
-            "start": start_date,
-            "end": end_date
-        }
-
-    # Latitude and longitude take precedence over ll and ur
-    if lat and lng:
-        lats, lngs = great_circle_dist(lat, lng, distance / 2.0)
-
-        ll = { "longitude": min(*lngs), "latitude": min(*lats) }
-        ur = { "longitude": max(*lngs), "latitude": max(*lats) }
-
-    if ll and ur:
-        payload["sceneFilter"]["spatialFilter"] = {
-            "filterType": "mbr",
-            "lowerLeft": ll,
-            "upperRight": ur
-        }
-
-    if where:
-        payload["sceneFilter"]["metadataFilter"] = {
-            "filterType": "value",
-            "filterId": where["filter_id"],
-            "value": where["value"],
-            "operand": "="
-        }
-
-    return json.dumps(payload)
+    pass

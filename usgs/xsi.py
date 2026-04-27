@@ -1,37 +1,31 @@
 
 
 def _get_xsd_boolean(element):
-    return True if element.text.lower() == "true" else False
+    pass
 
 
 def _get_xsd_int(element):
-    return int(element.text)
+    pass
 
 
 def _get_xsd_double(element):
-    return float(element.text)
+    pass
 
     
 def _get_xsd_long(element):
-    return int(element.text)
+    pass
 
 
 def _get_xsd_string(element):
-    return element.text
+    pass
 
 
 def _get_xsd_array(element):
-    items = element.findall("item")
-    
-    if len(items) > 0:
-        data = map(lambda item: { el.tag: get(el) for el in item }, items)
-    else:
-        data = { el.tag: get(el) for el in element }
-    return data
+    pass
 
 
 def _get_none(element):
-    return None
+    pass
 
 
 _dtypes = {

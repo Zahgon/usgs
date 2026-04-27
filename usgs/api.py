@@ -54,18 +54,7 @@ def _create_session(api_key):
     return session
 
 def dataset_filters(dataset, api_key=None):
-    api_key = _get_api_key(api_key)
-
-    with _create_session(api_key) as session:
-        url = '{}/dataset-filters'.format(USGS_API)
-        payload = payloads.dataset_filters(dataset)
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-
-    return response
+    pass
 
 def download_options(dataset, entity_ids, api_key=None):
     api_key = _get_api_key(api_key)
@@ -89,52 +78,17 @@ def dataset_download_options(dataset, api_key=None):
 
     :param str dataset: Used to identify the which dataset to return results for.
     """
-    api_key = _get_api_key(api_key)
-
-    with _create_session(api_key) as session:
-        url = '{}/dataset-download-options'.format(USGS_API)
-        payload = payloads.dataset_download_options(dataset)
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-
-    return response
+    pass
 
 def download_request(dataset, entity_id, product_id, api_key=None):
     """
     This method is used to insert the requested downloads into the download queue
     and returns the available download URLs.
     """
-    api_key = _get_api_key(api_key)
-
-    with _create_session(api_key) as session:
-        url = '{}/download-request'.format(USGS_API)
-        payload = payloads.download_request(dataset, entity_id, product_id)
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-
-    return response
+    pass
 
 def dataset_search(dataset=None, catalog=None, ll=None, ur=None, start_date=None, end_date=None, api_key=None):
-    api_key = _get_api_key(api_key)
-
-    with _create_session(api_key) as session:
-        url = '{}/dataset-search'.format(USGS_API)
-        payload = payloads.dataset_search(
-            dataset=dataset, catalog=catalog, start_date=start_date,
-            end_date=end_date, ll=ll, ur=ur)
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-
-    return response
+    pass
 
 def login(username, token, save=True):
     """
@@ -203,18 +157,7 @@ def scene_metadata(dataset, entity_id, api_key=None):
     :param str entity_id:
     :param str api_key:
     """
-    api_key = _get_api_key(api_key)
-
-    url = '{}/scene-metadata'.format(USGS_API)
-    payload = payloads.scene_metadata(dataset, entity_id)
-
-    with _create_session(api_key) as session:
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-    return response
+    pass
 
 
 def scene_search(dataset,
@@ -256,19 +199,4 @@ def scene_search(dataset,
     :api_key:
         API key for EROS. Required for searching.
     """
-    api_key = _get_api_key(api_key)
-
-    with _create_session(api_key) as session:
-        url = '{}/scene-search'.format(USGS_API)
-        payload = payloads.scene_search(
-            dataset, max_results=max_results, metadata_type=metadata_type,
-            start_date=start_date, end_date=end_date,
-            ll=ll, ur=ur, lat=lat, lng=lng, distance=distance, where=where,
-            starting_number=starting_number)
-        r = session.post(url, payload)
-
-    response = r.json()
-
-    _check_for_usgs_error(response)
-
-    return response
+    pass
